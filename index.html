@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEOTRACK - Платформа для пошуку авто</title>
+    <!-- Выходим из папки html и подключаем style.css из корня -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ==================== DESKTOP HEADER ==================== -->
+    <header class="desktop-header">
+        <a href="#" class="logo" id="logo-desktop">NEO<span>TRACK</span></a>
+        <div class="nav-links">
+            <a href="#" class="nav-link-main active" data-page="main">ГОЛОВНА</a>
+            <a href="#" class="nav-link-catalog" data-page="catalog">ЗНАЙТИ АВТО</a>
+            <a href="#" class="nav-link-add" data-page="add">ДОБАВИТИ МАРКУ</a>
+            <button class="plus-btn">+</button>
+        </div>
+    </header>
+
+    <!-- ==================== MOBILE HEADER ==================== -->
+    <header class="mobile-header">
+        <a href="#" class="logo" id="logo-mobile">NEO<span>TRACK</span></a>
+        <div class="mobile-header-right">
+            <span class="mobile-add-text">ДОБАВИТИ МАРКУ</span>
+            <button class="plus-btn">+</button>
+        </div>
+    </header>
+
+    <!-- ==================== ОСНОВНИЙ ДИНАМІЧНИЙ КОНТЕНТ ==================== -->
+    <main id="content-area">
+        <!-- Сюди скрипт буде автоматично підставляти потрібну сторінку -->
+    </main>
+
+    <!-- ==================== DESKTOP FOOTER ==================== -->
+    <footer class="desktop-footer">
+        <div class="footer-container">
+            <div class="footer-logo-box">
+                <a href="#" class="logo" style="color: #fff;">NEO<span>TRACK</span></a>
+                <p>NEOTRACK 2026. <br>Усі права захищені.</p>
+            </div>
+            <div class="footer-contacts">
+                <p class="footer-contacts-title">Контакти</p>
+                <p>✉ info@neotrack.com</p>
+                <p>📞 +38 (098) 123 45 67</p>
+                <p>📍 Україна, Київ</p>
+            </div>
+            <div class="footer-socials">
+                <p class="footer-socials-title">Ми в соцмережах</p>
+                <div class="social-icons-flex">
+                    <a href="#" class="social-btn">IG</a>
+                    <a href="#" class="social-btn">TG</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== MOBILE BOTTOM NAV (TAB BAR) ==================== -->
+    <nav class="mobile-nav">
+        <a href="#" class="nav-btn" data-page="main">
+            <span class="icon">🚗</span>
+            <span class="text">Головна</span>
+        </a>
+        <a href="#" class="nav-btn active" data-page="catalog">
+            <span class="icon">🔍</span>
+            <span class="text">Знайти авто</span>
+        </a>
+        <a href="#" class="nav-btn plus-icon-nav" data-page="add">
+            <span class="icon">✚</span>
+            <span class="text">Добавити</span>
+        </a>
+    </nav>
+
+    <!-- Выходим из папки html и заходим в папку js к скрипту -->
+    <script src="script.js"></script>
+</body>
+</html>
