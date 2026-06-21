@@ -1,232 +1,280 @@
-const carsData = [
-    { brand: "RANGE ROVER", model: "SPORT", generation: "L320 (1-ше пок.)", year: "2008", images: ["https://loremflickr.com/640/480/range,rover,sport?lock=101", "https://loremflickr.com/640/480/range,rover,sport?lock=102"] },
-    { brand: "RANGE ROVER", model: "SPORT", generation: "L494 (2-ге пок.)", year: "2017", images: ["https://loremflickr.com/640/480/range,rover,sport?lock=103", "https://loremflickr.com/640/480/range,rover,sport?lock=104"] },
-    { brand: "RANGE ROVER", model: "SPORT", generation: "L461 (3-тє пок.)", year: "2025", images: ["https://loremflickr.com/640/480/range,rover,sport?lock=105", "https://loremflickr.com/640/480/range,rover,sport?lock=106"] },
-
-    { brand: "BMW", model: "M5", generation: "E39 (3-тє пок.)", year: "1999", images: ["https://loremflickr.com/640/480/bmw,m5?lock=201", "https://loremflickr.com/640/480/bmw,m5?lock=202"] },
-    { brand: "BMW", model: "M5", generation: "F90 (6-те пок.)", year: "2021", images: ["https://loremflickr.com/640/480/bmw,m5?lock=203", "https://loremflickr.com/640/480/bmw,m5?lock=204"] },
-    { brand: "BMW", model: "M5", generation: "G90 (7-ме пок.)", year: "2025", images: ["https://loremflickr.com/640/480/bmw,m5?lock=205", "https://loremflickr.com/640/480/bmw,m5?lock=206"] },
-
-    { brand: "MERCEDES-BENZ", model: "G-CLASS", generation: "W463 (1-ше пок.)", year: "2012", images: ["https://loremflickr.com/640/480/mercedes,g-class?lock=301", "https://loremflickr.com/640/480/mercedes,g-class?lock=302"] },
-    { brand: "MERCEDES-BENZ", model: "G-CLASS", generation: "W463 FL (2-ге пок.)", year: "2022", images: ["https://loremflickr.com/640/480/mercedes,g-class?lock=303", "https://loremflickr.com/640/480/mercedes,g-class?lock=304"] },
-
-    { brand: "TESLA", model: "MODEL S", generation: "1-ше покоління", year: "2015", images: ["https://loremflickr.com/640/480/tesla,model-s?lock=401", "https://loremflickr.com/640/480/tesla,model-s?lock=402"] },
-    { brand: "TESLA", model: "MODEL S", generation: "Plaid (Рестайлінг)", year: "2023", images: ["https://loremflickr.com/640/480/tesla,model-s?lock=403", "https://loremflickr.com/640/480/tesla,model-s?lock=404"] },
-
-    { brand: "AUDI", model: "RS6", generation: "C7 (3-тє пок.)", year: "2015", images: ["https://loremflickr.com/640/480/audi,rs6?lock=501", "https://loremflickr.com/640/480/audi,rs6?lock=502"] },
-    { brand: "AUDI", model: "RS6", generation: "C8 (4-те пок.)", year: "2022", images: ["https://loremflickr.com/640/480/audi,rs6?lock=503", "https://loremflickr.com/640/480/audi,rs6?lock=504"] }
+const fallbackPhotos = [
+    "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=85",
+    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85",
+    "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1200&q=85",
+    "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=85",
+    "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=85",
+    "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1200&q=85",
+    "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=85",
+    "https://images.unsplash.com/photo-1504215680853-026ed2a45def?auto=format&fit=crop&w=1200&q=85",
+    "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=85",
+    "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=1200&q=85"
 ];
 
-// 2. HTML-ШАБЛОН ГОЛОВНОЇ СТОРІНКИ
+const car = (brand, model, generation, year, query, photoOffset) => ({
+    brand, model, generation, year, query,
+    fallbackImages: [0, 1, 2].map(index => fallbackPhotos[(photoOffset + index) % fallbackPhotos.length])
+});
+
+const carsData = [
+    car("RANGE ROVER", "SPORT", "L461 (3-тє покоління)", "2025", "Range Rover Sport L461 automobile", 0),
+    car("RANGE ROVER", "VELAR", "L560 (рестайлінг)", "2024", "Range Rover Velar automobile", 1),
+    car("RANGE ROVER", "EVOQUE", "L551 (2-ге покоління)", "2023", "Range Rover Evoque L551 automobile", 2),
+    car("BMW", "M5", "G90 (7-ме покоління)", "2025", "BMW M5 G90 automobile", 3),
+    car("BMW", "M3", "G80 (6-те покоління)", "2024", "BMW M3 G80 automobile", 4),
+    car("BMW", "X5", "G05 (рестайлінг)", "2024", "BMW X5 G05 automobile", 5),
+    car("MERCEDES-BENZ", "G-CLASS", "W465", "2025", "Mercedes-Benz G-Class W465 automobile", 6),
+    car("MERCEDES-BENZ", "E-CLASS", "W214", "2024", "Mercedes-Benz E-Class W214 automobile", 7),
+    car("MERCEDES-BENZ", "AMG GT", "C192", "2024", "Mercedes-AMG GT C192 automobile", 8),
+    car("TESLA", "MODEL S", "Plaid (рестайлінг)", "2024", "Tesla Model S Plaid automobile", 9),
+    car("TESLA", "MODEL 3", "Highland", "2024", "Tesla Model 3 Highland automobile", 0),
+    car("TESLA", "MODEL Y", "Juniper", "2025", "Tesla Model Y Juniper automobile", 1),
+    car("AUDI", "RS6", "C8 (4-те покоління)", "2024", "Audi RS6 C8 automobile", 2),
+    car("AUDI", "Q8", "4M8 (рестайлінг)", "2024", "Audi Q8 automobile", 3),
+    car("AUDI", "E-TRON GT", "рестайлінг", "2025", "Audi e-tron GT automobile", 4),
+    car("PORSCHE", "911", "992.2", "2025", "Porsche 911 992 automobile", 5),
+    car("PORSCHE", "CAYENNE", "9Y0 (рестайлінг)", "2024", "Porsche Cayenne 9Y0 automobile", 6),
+    car("PORSCHE", "TAYCAN", "рестайлінг", "2025", "Porsche Taycan automobile", 7),
+    car("TOYOTA", "CAMRY", "XV80", "2025", "Toyota Camry XV80 automobile", 8),
+    car("TOYOTA", "LAND CRUISER", "J250", "2025", "Toyota Land Cruiser J250 automobile", 9),
+    car("TOYOTA", "GR SUPRA", "A90", "2024", "Toyota GR Supra A90 automobile", 0),
+    car("FORD", "MUSTANG", "S650", "2025", "Ford Mustang S650 automobile", 1),
+    car("FORD", "BRONCO", "U725", "2024", "Ford Bronco U725 automobile", 2),
+    car("FORD", "F-150", "14-те покоління", "2024", "Ford F-150 fourteenth generation automobile", 3),
+    car("VOLKSWAGEN", "GOLF", "Mk8 (рестайлінг)", "2025", "Volkswagen Golf Mk8 automobile", 4),
+    car("VOLKSWAGEN", "TIGUAN", "3-тє покоління", "2024", "Volkswagen Tiguan third generation automobile", 5),
+    car("VOLKSWAGEN", "TOUAREG", "CR (рестайлінг)", "2024", "Volkswagen Touareg CR automobile", 6),
+    car("LAMBORGHINI", "REVUELTO", "1-ше покоління", "2024", "Lamborghini Revuelto automobile", 7),
+    car("LAMBORGHINI", "URUS", "SE", "2025", "Lamborghini Urus SE automobile", 8),
+    car("LAMBORGHINI", "HURACÁN", "STO", "2023", "Lamborghini Huracan STO automobile", 9)
+];
+
 const mainPageHTML = `
     <section class="hero">
-  <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=80" alt="Hero Car" class="hero-bg">
+        <img src="${fallbackPhotos[0]}" alt="Спортивний автомобіль" class="hero-bg">
         <div class="hero-content">
-            <h1><span>NEOTRACK</span> - платформа для пошуку та вибору автомобілів.</h1>
-            <p>Ми допомагаємо швидко знаходити автомобілі різних марок, поколінь та років випуску.</p>
+            <h1><span>NEOTRACK</span> — платформа для пошуку та вибору автомобілів.</h1>
+            <p>Знаходьте автомобілі різних марок, моделей, поколінь та років випуску.</p>
             <button class="btn-yellow" id="hero-action-btn">Переглянути авто</button>
         </div>
     </section>
     <section class="about-section">
         <div class="about-text">
             <h2 class="section-title">Хто ми</h2>
-            <p class="about-subtitle"><span>NEOTRACK</span> — це сучасний online-сервіс для зручного пошуку автомобілів.</p>
+            <p class="about-subtitle"><span>NEOTRACK</span> — сучасний онлайн-сервіс для зручного пошуку автомобілів.</p>
             <ul class="about-list">
                 <li>сучасний дизайн та зручна навігація</li>
                 <li>швидкий пошук автомобілів</li>
-                <li>великий каталог різних брендів</li>
+                <li>10 популярних брендів і десятки моделей</li>
                 <li>актуальна та перевірена інформація</li>
-                <li>комфортне користування сайтом на будь-якому пристрої</li>
+                <li>повноцінні фотогалереї для кожного авто</li>
             </ul>
         </div>
-        <div class="about-img-box">
-            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80" alt="About Us Car" class="about-img">
-        </div>
+        <div class="about-img-box"><img src="${fallbackPhotos[1]}" alt="Автомобіль на дорозі" class="about-img"></div>
     </section>
-    <section style="display: flex; flex-direction: column; gap: 25px;">
+    <section class="advantages-section">
         <h2 class="advantages-title">Наші переваги</h2>
         <div class="advantages-grid">
-            <div class="adv-card"><div class="adv-icon">🚗</div><div><h3>Великий вибір</h3><p>Багато автомобілів різних брендів, моделей і років випуску.</p></div></div>
-            <div class="adv-card"><div class="adv-icon">🔍</div><div><h3>Швидкий пошук</h3><p>Фільтрація по марці, моделі та поколінню за лічені секунди.</p></div></div>
-            <div class="adv-card"><div class="adv-icon">🛡️</div><div><h3>Надійність</h3><p>Перевіряємо історію автомобіля, технічний стан та документи.</p></div></div>
+            <div class="adv-card"><div class="adv-icon">🚗</div><div><h3>Великий вибір</h3><p>Багато брендів, моделей і поколінь автомобілів.</p></div></div>
+            <div class="adv-card"><div class="adv-icon">🔎</div><div><h3>Швидкий пошук</h3><p>Фільтрація за маркою, моделлю та поколінням за кілька секунд.</p></div></div>
+            <div class="adv-card"><div class="adv-icon">📷</div><div><h3>Реальні фото</h3><p>Для кожного авто завантажується окрема галерея фотографій.</p></div></div>
         </div>
-    </section>
-`;
+    </section>`;
 
-// 3. HTML-ШАБЛОН СТОРІНКИ КАТАЛОГУ (Всі селекти заблоковані по черзі)
 const catalogPageHTML = `
+    <section class="catalog-intro">
+        <div><p class="eyebrow">Каталог NEOTRACK</p><h1>30 автомобілів у 10 марках</h1></div>
+        <p>Оберіть марку, модель і покоління. Можна шукати лише за маркою, щоб побачити всі її моделі.</p>
+    </section>
     <section class="filter-panel">
-        <select class="filter-select" id="brand-select">
-            <option value="" disabled selected>Марка &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼</option>
-            <option value="RANGE ROVER">Range Rover</option>
-            <option value="BMW">BMW</option>
-            <option value="MERCEDES-BENZ">Mercedes-Benz</option>
-            <option value="TESLA">Tesla</option>
-            <option value="AUDI">Audi</option>
-        </select>
-        
-        <select class="filter-select" id="model-select" disabled>
-            <option value="" disabled selected>Модель &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼</option>
-        </select>
-        
-        <select class="filter-select" id="gen-select" disabled>
-            <option value="" disabled selected>Покоління &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼</option>
-        </select>
-        
+        <select class="filter-select" id="brand-select"><option value="">Усі марки</option></select>
+        <select class="filter-select" id="model-select" disabled><option value="">Усі моделі</option></select>
+        <select class="filter-select" id="gen-select" disabled><option value="">Усі покоління</option></select>
         <button class="btn-search">Пошук</button>
     </section>
+    <div class="catalog-status" id="catalog-status">Оберіть параметри або натисніть «Пошук», щоб переглянути весь каталог.</div>
+    <section class="catalog-grid" id="cars-list-container"></section>`;
 
-    <section class="catalog-grid" id="cars-list-container"></section>
-`;
+const contentArea = document.getElementById("content-area");
+const imageCache = new Map();
 
-const contentArea = document.getElementById('content-area');
+function uniqueValues(items, key) {
+    return [...new Set(items.map(item => item[key]))].sort((a, b) => a.localeCompare(b, "uk"));
+}
 
-// 4. ГОЛОВНА ФУНКЦІЯ РЕНДЕРУ ТА ДИНАМІЧНОЇ ФІЛЬТРАЦІЇ
-function renderPage(pageName) {
-    if (!contentArea) return;
-    
-    if (pageName === 'main') {
-        contentArea.innerHTML = mainPageHTML;
-        const actionBtn = document.getElementById('hero-action-btn');
-        if (actionBtn) {
-            actionBtn.addEventListener('click', () => renderPage('catalog'));
-        }
-        
-    } else if (pageName === 'catalog') {
-        contentArea.innerHTML = catalogPageHTML;
-        
-        const brandSel = document.getElementById('brand-select');
-        const modelSel = document.getElementById('model-select');
-        const genSel = document.getElementById('gen-select');
-        const searchBtn = document.querySelector('.btn-search');
-        const container = document.getElementById('cars-list-container');
-        
-        // КРОК А: Користувач обрав Марку -> підтягуємо її Моделі
-        brandSel.addEventListener('change', () => {
-            modelSel.innerHTML = `<option value="" disabled selected>Модель &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼</option>`;
-            genSel.innerHTML = `<option value="" disabled selected>Покоління &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼</option>`;
-            genSel.disabled = true;
-            
-            const models = [];
-            carsData.forEach(car => {
-                if (car.brand === brandSel.value && !models.includes(car.model)) {
-                    models.push(car.model);
-                }
-            });
-            
-            models.forEach(m => modelSel.innerHTML += `<option value="${m}">${m}</option>`);
-            modelSel.disabled = false;
-        });
-
-        // КРОК Б: Користувач обрав Модель -> підтягуємо її Покоління
-        modelSel.addEventListener('change', () => {
-            genSel.innerHTML = `<option value="" disabled selected>Покоління &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼</option>`;
-            
-            const generations = [];
-            carsData.forEach(car => {
-                if (car.brand === brandSel.value && car.model === modelSel.value && !generations.includes(car.generation)) {
-                    generations.push(car.generation);
-                }
-            });
-            
-            generations.forEach(g => genSel.innerHTML += `<option value="${g}">${g}</option>`);
-            genSel.disabled = false;
-        });
-        
-        // КРОК В: Клік на «ПОШУК» -> виводимо картки з 2 фотографіями окремо (ВИПРАВЛЕНО ІНДЕКСИ КАРТИНОК)
-        searchBtn.addEventListener('click', () => {
-            container.innerHTML = '';
-            
-            carsData.forEach(car => {
-                const matchBrand = car.brand === brandSel.value;
-                const matchModel = car.model === modelSel.value;
-                const matchGen = !genSel.value || car.generation === genSel.value;
-                
-if (matchBrand && matchModel && matchGen) {
-    car.images.forEach((image, index) => {
-        container.innerHTML += `
-            <div class="car-card">
-                <div class="car-img-box">
-                    <img src="${image}" alt="${car.brand} ${car.model} photo ${index + 1}" class="car-img" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; max-width: 100%; max-height: 100%;">
-                </div>
-                <div class="car-tags">
-                    <div class="car-tag">${car.brand}</div>
-                    <div class="car-tag">${car.model}</div>
-                    <div class="car-tag">${car.generation}</div>
-                </div>
-            </div>`;
+function fillSelect(select, values, placeholder) {
+    select.innerHTML = `<option value="">${placeholder}</option>`;
+    values.forEach(value => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
     });
 }
-            });
-            
-            if (container.innerHTML === '') {
-                container.innerHTML = `<h3 style="grid-column: 1/-1; text-align: center; color: #666; margin-top: 20px; text-transform: uppercase;">Нічого не знайдено</h3>`;
-            }
-        });
 
-    } else if (pageName === 'add') {
+async function fetchCommonsImages(selectedCar) {
+    const cacheKey = `${selectedCar.brand}-${selectedCar.model}`;
+    if (imageCache.has(cacheKey)) return imageCache.get(cacheKey);
+    const params = new URLSearchParams({
+        action: "query", format: "json", origin: "*", generator: "search",
+        gsrsearch: selectedCar.query, gsrnamespace: "6", gsrlimit: "12",
+        prop: "imageinfo", iiprop: "url", iiurlwidth: "1200"
+    });
+    try {
+        const response = await fetch(`https://commons.wikimedia.org/w/api.php?${params}`);
+        if (!response.ok) throw new Error("Photo request failed");
+        const data = await response.json();
+        const blockedWords = /(logo|badge|emblem|interior|engine|wheel|drawing|diagram|icon|svg)/i;
+        const photos = Object.values(data.query?.pages || {})
+            .filter(page => !blockedWords.test(page.title))
+            .map(page => page.imageinfo?.[0]?.thumburl || page.imageinfo?.[0]?.url)
+            .filter(Boolean).slice(0, 5);
+        const result = photos.length >= 3 ? photos : selectedCar.fallbackImages;
+        imageCache.set(cacheKey, result);
+        return result;
+    } catch {
+        return selectedCar.fallbackImages;
+    }
+}
+
+function createCarCard(selectedCar) {
+    const article = document.createElement("article");
+    article.className = "car-card";
+    article.innerHTML = `
+        <div class="car-gallery">
+            <div class="car-img-box">
+                <div class="photo-loader">Завантажуємо фото…</div>
+                <img alt="${selectedCar.brand} ${selectedCar.model}" class="car-img" hidden>
+                <button class="gallery-arrow gallery-prev" type="button" aria-label="Попереднє фото">‹</button>
+                <button class="gallery-arrow gallery-next" type="button" aria-label="Наступне фото">›</button>
+                <span class="photo-counter">1 / 3</span>
+            </div>
+            <div class="gallery-thumbs"></div>
+        </div>
+        <div class="car-info">
+            <div><p class="car-brand">${selectedCar.brand}</p><h2>${selectedCar.model}</h2></div>
+            <span class="car-year">${selectedCar.year}</span>
+        </div>
+        <div class="car-tags"><div class="car-tag">${selectedCar.generation}</div></div>`;
+
+    fetchCommonsImages(selectedCar).then(images => {
+        let currentIndex = 0;
+        const mainImage = article.querySelector(".car-img");
+        const loader = article.querySelector(".photo-loader");
+        const thumbs = article.querySelector(".gallery-thumbs");
+        const counter = article.querySelector(".photo-counter");
+        const showImage = index => {
+            currentIndex = (index + images.length) % images.length;
+            mainImage.src = images[currentIndex];
+            mainImage.hidden = false;
+            loader.hidden = true;
+            counter.textContent = `${currentIndex + 1} / ${images.length}`;
+            thumbs.querySelectorAll("button").forEach((button, thumbIndex) => {
+                button.classList.toggle("active", thumbIndex === currentIndex);
+            });
+        };
+        mainImage.addEventListener("error", () => {
+            mainImage.src = selectedCar.fallbackImages[currentIndex % selectedCar.fallbackImages.length];
+        }, { once: true });
+        images.forEach((image, index) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "gallery-thumb";
+            button.setAttribute("aria-label", `Відкрити фото ${index + 1}`);
+            button.innerHTML = `<img src="${image}" alt="">`;
+            button.addEventListener("click", () => showImage(index));
+            thumbs.appendChild(button);
+        });
+        article.querySelector(".gallery-prev").addEventListener("click", () => showImage(currentIndex - 1));
+        article.querySelector(".gallery-next").addEventListener("click", () => showImage(currentIndex + 1));
+        showImage(0);
+    });
+    return article;
+}
+
+function renderCars(cars) {
+    const container = document.getElementById("cars-list-container");
+    const status = document.getElementById("catalog-status");
+    container.innerHTML = "";
+    if (!cars.length) {
+        status.textContent = "За вибраними параметрами нічого не знайдено.";
+        return;
+    }
+    status.textContent = `Знайдено: ${cars.length}`;
+    cars.forEach(selectedCar => container.appendChild(createCarCard(selectedCar)));
+}
+
+function setupCatalog() {
+    const brandSelect = document.getElementById("brand-select");
+    const modelSelect = document.getElementById("model-select");
+    const generationSelect = document.getElementById("gen-select");
+    fillSelect(brandSelect, uniqueValues(carsData, "brand"), "Усі марки");
+    brandSelect.addEventListener("change", () => {
+        const brandCars = brandSelect.value ? carsData.filter(item => item.brand === brandSelect.value) : carsData;
+        fillSelect(modelSelect, uniqueValues(brandCars, "model"), "Усі моделі");
+        modelSelect.disabled = !brandSelect.value;
+        fillSelect(generationSelect, [], "Усі покоління");
+        generationSelect.disabled = true;
+    });
+    modelSelect.addEventListener("change", () => {
+        const modelCars = carsData.filter(item =>
+            item.brand === brandSelect.value && (!modelSelect.value || item.model === modelSelect.value)
+        );
+        fillSelect(generationSelect, uniqueValues(modelCars, "generation"), "Усі покоління");
+        generationSelect.disabled = !modelSelect.value;
+    });
+    document.querySelector(".btn-search").addEventListener("click", () => {
+        renderCars(carsData.filter(item =>
+            (!brandSelect.value || item.brand === brandSelect.value) &&
+            (!modelSelect.value || item.model === modelSelect.value) &&
+            (!generationSelect.value || item.generation === generationSelect.value)
+        ));
+    });
+}
+
+function renderPage(pageName) {
+    if (!contentArea) return;
+    if (pageName === "main") {
+        contentArea.innerHTML = mainPageHTML;
+        document.getElementById("hero-action-btn")?.addEventListener("click", () => renderPage("catalog"));
+    } else if (pageName === "catalog") {
+        contentArea.innerHTML = catalogPageHTML;
+        setupCatalog();
+    } else if (pageName === "add") {
         contentArea.innerHTML = `
-            <section style="max-width: 500px; margin: 40px auto; background: #ffffff; padding: 40px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 20px;">
-                <h2 style="font-size: 22px; font-weight: 700; text-transform: uppercase; text-align: center; color: #0B0F19; margin-bottom: 10px;">Добавити марку</h2>
-                <div style="display: flex; flex-direction: column; gap: 8px;"><label style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #666; text-align: left;">Марка</label><input type="text" id="add-brand" placeholder="Наприклад, RANGE ROVER" style="width: 100%; background: #0B0F19; color: #ffffff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; font-size: 14px; outline: none;"></div>
-                <div style="display: flex; flex-direction: column; gap: 8px;"><label style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #666; text-align: left;">Модель</label><input type="text" id="add-model" placeholder="Наприклад, SPORT" style="width: 100%; background: #0B0F19; color: #ffffff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; font-size: 14px; outline: none;"></div>
-                <div style="display: flex; flex-direction: column; gap: 8px;"><label style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #666; text-align: left;">Покоління / Рік</label><input type="text" id="add-year" placeholder="Наприклад, 2025" style="width: 100%; background: #0B0F19; color: #ffffff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; font-size: 14px; outline: none;"></div>
-                <div style="display: flex; flex-direction: column; gap: 8px;"><label style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #666; text-align: left;">Фото машини</label><label style="width: 100%; background: #E5E5E5; color: #0B0F19; border: 2px dashed #0B0F19; padding: 15px; border-radius: 8px; font-weight: bold; font-size: 14px; text-align: center; cursor: pointer; display: block; transition: 0.2s;">📁 Виберіть файл зображення<input type="file" id="add-img" accept="image/*" style="display: none;"></label></div>
-                <button id="submit-car-btn" class="btn-yellow" style="width: 100%; padding: 14px; margin-top: 10px; border-radius: 8px; font-weight: 900; text-align: center; justify-content: center; display: flex;">Підтвердити додавання</button>
-            </section>
-        `;
-        document.getElementById('submit-car-btn').addEventListener('click', () => {
-            alert('Марку успішно надіслано на модерацію!');
-            renderPage('catalog'); 
+            <section class="add-form">
+                <h2>Додати автомобіль</h2>
+                <label>Марка<input type="text" placeholder="Наприклад, BMW"></label>
+                <label>Модель<input type="text" placeholder="Наприклад, M5"></label>
+                <label>Покоління / рік<input type="text" placeholder="Наприклад, G90 / 2025"></label>
+                <label class="file-label">📁 Виберіть фотографії<input type="file" accept="image/*" multiple></label>
+                <button id="submit-car-btn" class="btn-yellow">Надіслати на модерацію</button>
+            </section>`;
+        document.getElementById("submit-car-btn").addEventListener("click", () => {
+            alert("Автомобіль успішно надіслано на модерацію!");
+            renderPage("catalog");
         });
     }
     updateActiveNavigation(pageName);
     window.scrollTo(0, 0);
 }
 
-// 5. НАЛАШТУВАННЯ НАВІГАЦІЇ ТА КЛІКІВ (СУПЕР-НАДІЙНИЙ ВАРІАНТ ЗА ТЕКСТОМ)
 function updateActiveNavigation(pageName) {
-    document.querySelectorAll('.nav-links a, .mobile-nav .nav-btn').forEach(btn => {
-        const page = btn.getAttribute('data-page');
-        const text = btn.innerText ? btn.innerText.toUpperCase() : '';
-        
-        if (page === pageName || (pageName === 'catalog' && text.includes('ЗНАЙТИ'))) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
+    document.querySelectorAll(".nav-links a, .mobile-nav .nav-btn").forEach(button => {
+        button.classList.toggle("active", button.getAttribute("data-page") === pageName);
     });
 }
 
-document.querySelectorAll('.nav-links a, .mobile-nav a, header a').forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        let targetPage = link.getAttribute('data-page');
-        const text = link.innerText ? link.innerText.toUpperCase() : '';
-        
-        if (!targetPage) {
-            if (text.includes('ГОЛОВНА')) targetPage = 'main';
-            else if (text.includes('ЗНАЙТИ') || text.includes('АВТО')) targetPage = 'catalog';
-            else if (text.includes('ДОБАВИТИ') || text.includes('МАРКУ')) targetPage = 'add';
-        }
-        
-        if (targetPage) {
-            renderPage(targetPage);
-        }
+document.querySelectorAll(".nav-links a, .mobile-nav a").forEach(link => {
+    link.addEventListener("click", event => {
+        event.preventDefault();
+        renderPage(link.getAttribute("data-page"));
     });
 });
-
-const logoDesktop = document.getElementById('logo-desktop');
-const logoMobile = document.getElementById('logo-mobile');
-if (logoDesktop) logoDesktop.addEventListener('click', (e) => { e.preventDefault(); renderPage('main'); });
-if (logoMobile) logoMobile.addEventListener('click', (e) => { e.preventDefault(); renderPage('main'); });
-
-document.querySelectorAll('.plus-btn, .mobile-add-text').forEach(element => {
-    element.addEventListener('click', (e) => {
-        e.preventDefault();
-        renderPage('add');
-    });
+document.getElementById("logo-desktop")?.addEventListener("click", event => { event.preventDefault(); renderPage("main"); });
+document.getElementById("logo-mobile")?.addEventListener("click", event => { event.preventDefault(); renderPage("main"); });
+document.querySelectorAll(".plus-btn, .mobile-add-text").forEach(element => {
+    element.addEventListener("click", event => { event.preventDefault(); renderPage("add"); });
 });
 
-renderPage('main');
+renderPage("main");
